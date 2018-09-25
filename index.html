@@ -1,65 +1,19 @@
 <h1>MattChatt</h1>
 
 
-<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
-<script>
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyDMFDDjbk7tOEeqsO_evebul166VQl4CR0",
-        authDomain: "first-lesson-a81e0.firebaseapp.com",
-        databaseURL: "https://first-lesson-a81e0.firebaseio.com",
-        projectId: "first-lesson-a81e0",
-        storageBucket: "first-lesson-a81e0.appspot.com",
-        messagingSenderId: "213223109314"
-    };
-    firebase.initializeApp(config);
-</script>
+
+<form>
+	<label for="changeName">Change your name</label>
+<input type="text" id="changeName">
+<button id="changeNameButton">Send</button>
+</form>
 <div id="chatWindow"></div>
 <form >
     <input id="mess" type="text">
     <button id="send">Send</button>
 </form>
 
-
-<script>
-var database = firebase.database();
-
-
-
-function getMessage(data) {
-    var messages = data.val();
-    console.log(Object.values(messages));
-    document.getElementById("chatWindow").innerHTML = ""
-    Object.values(messages).forEach((bericht)=>{
-
-        message = document.createElement("div")
-        var name = document.createElement("span")
-        var text = document.createElement("span")
-        name.innerText = Object.keys(bericht)[0];
-        text.innerText = Object.values(bericht)[0];
-        name.setAttribute("id", "name")
-        text.setAttribute("id", "message")
-        message.appendChild(name);
-        message.appendChild(text);
-        document.getElementById("chatWindow").appendChild(message)
-    })
-
-
-}
-
-function sendMessage(message) {
-    database.ref("messages/").push(JSON.parse('{"Matthias":"'+message+'"}'));
-}
-function sendFromPage(e){
-    e.preventDefault();
-    message = document.getElementById("mess").value;
-    document.getElementById("mess").value = "";
-    sendMessage(message)
-}
-document.getElementById("send").addEventListener("click", sendFromPage);
-
-
-database.ref("messages/").on("value", getMessage)
-</script>
+<script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+<script type="text/javascript" src="assets/js/index.js"></script>
 
 
