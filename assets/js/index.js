@@ -12,6 +12,7 @@
 
 var database = firebase.database();
 var yourname = "NoName"
+var nameSet = false
 
 function changeName (name){
     yourname = name
@@ -30,6 +31,7 @@ function getMessage(data) {
    messages.forEach((bericht)=>{
 
         message = document.createElement("div")
+        message.setAttribute("id", "messageBox")
         var name = document.createElement("span")
         var text = document.createElement("span")
         name.innerText = Object.keys(bericht)[0];
@@ -39,11 +41,13 @@ function getMessage(data) {
         message.appendChild(name);
         message.appendChild(text);
         document.getElementById("chatWindow").appendChild(message)
-        updateScroll();
+        
         
     }
    
 )
+
+updateScroll();
 
 
 notify(messages[messages.length-1])
@@ -54,9 +58,13 @@ function sendMessage(message) {
 }
 function sendFromPage(e){
     e.preventDefault();
+    if(nameSet){
     message = document.getElementById("mess").value;
     document.getElementById("mess").value = "";
-    sendMessage(message)
+    sendMessage(message)}
+    else{
+        alert("please choose a name")
+    }
 }
 
 function changeNameFromPage(e){
@@ -64,7 +72,7 @@ function changeNameFromPage(e){
 
     changeName(document.getElementById("changeName").value)
     document.getElementById("nameForm").remove()
-    document.getElementById("chatElements").classList.remove("invisible")
+    nameSet = true
 
 }
 document.getElementById("send").addEventListener("click", sendFromPage);
@@ -73,9 +81,9 @@ document.getElementById("changeNameButton").addEventListener("click", changeName
 
 database.ref("messages/").on("value", getMessage)
 
-var element = document.getElementById("chatWindow");
-element.scrollTop = element.scrollHeight;
+
 function updateScroll(){
     var element = document.getElementById("chatWindow");
     element.scrollTop = element.scrollHeight;
+    console.log(element.scrollHeight)
 }

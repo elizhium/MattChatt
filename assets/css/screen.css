@@ -1,9 +1,19 @@
 #name{
-    padding-right: 20px
+    width: 10%;
+    overflow: hidden;
+
+}
+#name, #message{
+    display: inline-block;
+    line-height: 1rem
+}
+#messageBox{
+    margin-bottom: 5px;
+    border-bottom: 1px solid black
 }
 #chatWindow{
     overflow-y: scroll;
-    height: 500px
+    height: 80vh
 }
 
 .invisible{
