@@ -17,11 +17,17 @@ function changeName (name){
     yourname = name
 }
 
+function notify (bericht){
+   
+       var not =  new Notification(title = bericht);
+    
+}
+
 function getMessage(data) {
-    var messages = data.val();
-    console.log(Object.values(messages));
+    var messages = Object.values(data.val());
+    console.log(messages);
     document.getElementById("chatWindow").innerHTML = ""
-    Object.values(messages).forEach((bericht)=>{
+   messages.forEach((bericht)=>{
 
         message = document.createElement("div")
         var name = document.createElement("span")
@@ -34,9 +40,13 @@ function getMessage(data) {
         message.appendChild(text);
         document.getElementById("chatWindow").appendChild(message)
         updateScroll();
-    })
+        
+    }
+   
+)
 
 
+notify(messages[messages.length-1])
 }
 
 function sendMessage(message) {
@@ -53,7 +63,9 @@ function changeNameFromPage(e){
     e.preventDefault()
 
     changeName(document.getElementById("changeName").value)
-    document.getElementById("changeName").value = ""
+    document.getElementById("nameForm").remove()
+    document.getElementById("chatElements").classList.remove("invisible")
+
 }
 document.getElementById("send").addEventListener("click", sendFromPage);
 document.getElementById("changeNameButton").addEventListener("click", changeNameFromPage)

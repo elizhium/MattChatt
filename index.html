@@ -13,16 +13,18 @@
 
 
 
-    <form>
+    <form id="nameForm">
         <label for="changeName">Change your name</label>
     <input type="text" id="changeName">
     <button id="changeNameButton">Send</button>
     </form>
+    <div id="chatElements"  class="invisible">
     <div id="chatWindow"></div>
     <form >
         <input id="mess" type="text">
         <button id="send">Send</button>
     </form>
+    </div>
     
     <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
     <script type="text/javascript" src="assets/js/index.js"></script>
