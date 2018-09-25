@@ -3,9 +3,13 @@
     overflow: hidden;
 
 }
-#name, #message{
+#name, #message, #time{
     display: inline-block;
     line-height: 1rem
+}
+#time{
+    float: right;
+    margin-right:5vw
 }
 #messageBox{
     margin-bottom: 5px;

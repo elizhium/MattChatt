@@ -34,12 +34,16 @@ function getMessage(data) {
         message.setAttribute("id", "messageBox")
         var name = document.createElement("span")
         var text = document.createElement("span")
+        var time = document.createElement("span")
         name.innerText = Object.keys(bericht)[0];
         text.innerText = Object.values(bericht)[0];
+        time.innerText = Object.values(bericht)[1]
         name.setAttribute("id", "name")
         text.setAttribute("id", "message")
+        time.setAttribute("id", "time")
         message.appendChild(name);
         message.appendChild(text);
+        message.appendChild(time)
         document.getElementById("chatWindow").appendChild(message)
         
         
@@ -47,14 +51,27 @@ function getMessage(data) {
    
 )
 
+
+
+
+
 updateScroll();
 
 
 notify(messages[messages.length-1])
 }
 
+
+
 function sendMessage(message) {
-    database.ref("messages/").push(JSON.parse('{"'+yourname+'":"'+message+'"}'));
+    var d = new Date
+   var timeString = d.getHours()
+   var min = d.getMinutes()
+    if (d.getMinutes()<10){
+         min = "0"+min  
+    }
+    timeString = timeString + ":" + min
+    database.ref("messages/").push(JSON.parse('{"'+yourname+'":"'+message+'", "timestamp":"'+  timeString +'"}'));
 }
 function sendFromPage(e){
     e.preventDefault();
