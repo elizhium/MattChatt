@@ -11,7 +11,7 @@
     firebase.initializeApp(config);
 
 var database = firebase.database();
-var yourname = "Matthias"
+var yourname = "NoName"
 
 function changeName (name){
     yourname = name
