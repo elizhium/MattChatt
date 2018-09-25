@@ -33,6 +33,7 @@ function getMessage(data) {
         message.appendChild(name);
         message.appendChild(text);
         document.getElementById("chatWindow").appendChild(message)
+        updateScroll();
     })
 
 
@@ -59,3 +60,10 @@ document.getElementById("changeNameButton").addEventListener("click", changeName
 
 
 database.ref("messages/").on("value", getMessage)
+
+var element = document.getElementById("chatWindow");
+element.scrollTop = element.scrollHeight;
+function updateScroll(){
+    var element = document.getElementById("chatWindow");
+    element.scrollTop = element.scrollHeight;
+}

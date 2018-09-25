@@ -1,0 +1,7 @@
+#name{
+    padding-right: 20px
+}
+#chatWindow{
+    overflow-y: scroll;
+    height: 500px
+}
