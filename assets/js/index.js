@@ -11,6 +11,7 @@
     firebase.initializeApp(config);
 
 var database = firebase.database();
+var ref = database.ref("messages/")
 var yourname = ""
 var nameSet = false
 var focused = true
@@ -22,7 +23,7 @@ function changeName (name){
 
 function notify (bericht){
     window.document.title = "berichtje!!!"
-    console.log("Berichtje")
+
 
     if (!Notification.permission==="granted"){
         Notification.requestPermission()
@@ -32,13 +33,26 @@ function notify (bericht){
         body: "Je hebt een bericht gekregen op MattChatt"
     });
 
-    console.log(not)
+
     
+}
+
+function cleanChat(data){
+    var removed = 0
+    while((Object.keys(data)).length-removed >250){
+    ref.child(Object.keys(data)[0]).remove()
+    removed += 1 
+    
+
+    
+    }
+
+
 }
 
 function getMessage(data) {
     var messages = Object.values(data.val());
-    console.log(messages);
+
     document.getElementById("chatWindow").innerHTML = ""
    messages.forEach((bericht)=>{
 
@@ -64,13 +78,15 @@ function getMessage(data) {
         
         
     }
+    
    
 )
 
 updateScroll();
 
-if(!focused){notify(messages[messages.length-1])
-}
+if(!focused){notify(messages[messages.length-1])}
+
+cleanChat(data.val())
 
 }
 
@@ -125,7 +141,7 @@ $(document).ready(function () {
 function updateScroll(){
     var element = document.getElementById("chatWindow");
     element.scrollTop = element.scrollHeight;
-    console.log(element.scrollHeight)
+
 }
 
 window.onfocus = function(){
