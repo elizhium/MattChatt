@@ -56,9 +56,8 @@ h1{
     text-align: right;
     font-size: 0.7rem;
 }
-}
 
-#chatElements > form > input{
+#chatElements  input{
     width: 95%;
 }
 
