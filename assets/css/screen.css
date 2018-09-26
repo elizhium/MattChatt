@@ -3,6 +3,11 @@
     --text-collor: Black;
 }
 
+body{
+    font-family: calibri;
+    font-size: 16px;
+}
+
 h1{
     text-align: center;
 }
@@ -66,4 +71,10 @@ h1{
 
 .invisible{
     display: none
+}
+
+.me{
+    direction: rtl;
+    text-align: left;
+    margin-left: 0.5vw;
 }
