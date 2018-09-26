@@ -26,11 +26,12 @@ h1{
 
 }
 #name, #message, #time{
-    display: inline-block;
+    display: block;
     line-height: 1rem
 }
 
 #message{
+    display: inline-block;
     border-style: solid;
     border-color: pink;
     border-width: 4px;
@@ -39,10 +40,12 @@ h1{
     padding-right: 1rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    background-color: pink;
+
 }
 
 #time{
-    float: right;
+    float: left;
     margin-right:5vw
 }
 #messageBox{
