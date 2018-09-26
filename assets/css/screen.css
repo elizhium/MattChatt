@@ -19,18 +19,33 @@ h1{
     margin-bottom: 1rem;
 }
 
-#name{
+.name{
     width: 10%;
     overflow: hidden;
     margin-right: 5vw
 
 }
-#name, #message, #time{
-    display: inline-block;
+.name, .message, .time{
+    display: block;
     line-height: 1rem
 }
-#time{
-    float: right;
+
+.message{
+    display: inline-block;
+    border-style: solid;
+    border-color: pink;
+    border-width: 4px;
+    border-radius: 15px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color: pink;
+
+}
+
+.time{
+    float: left;
     margin-right:5vw
 }
 #messageBox{
