@@ -19,8 +19,11 @@ function changeName (name){
 }
 
 function notify (bericht){
+    if (!Notification.permission==="granted"){
+        Notification.requestPermission()
+    }
    
-       var not =  new Notification(title = bericht);
+       var not =  new Notification(bericht);
     
 }
 
