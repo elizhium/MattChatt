@@ -75,6 +75,13 @@ h1{
 
 .me{
     direction: rtl;
-    text-align: left;
     margin-left: 0.5vw;
+}
+
+.me .name{
+    margin-right: 0.5vw;
+}
+
+.me .time{
+    text-align: left;
 }
