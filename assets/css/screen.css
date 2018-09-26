@@ -82,6 +82,10 @@ h1{
     margin-right: 0.5vw;
 }
 
+.me .message{
+    direction: ltr;
+}
+
 .me .time{
     text-align: left;
 }
