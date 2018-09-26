@@ -19,15 +19,22 @@ h1{
     margin-bottom: 1rem;
 }
 
-.name{
-    width: 10%;
-    overflow: hidden;
-    margin-right: 5vw
-
+.messageBox{
+    margin-bottom: 1rem;
 }
+
 .name, .message, .time{
     display: block;
     line-height: 1rem
+}
+
+.name{
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+
+.textTime{
+    width: max-content;
 }
 
 .message{
@@ -45,13 +52,9 @@ h1{
 }
 
 .time{
-    float: left;
-    margin-right:5vw
-}
-#messageBox{
-    margin-bottom: 5px;
-    border-bottom: 1px solid black;
-    padding-bottom: 0.5vw;
+    margin-right:5vw;
+    position: relative;
+    right: 0;
 }
 
 #chatElements > form > input{
