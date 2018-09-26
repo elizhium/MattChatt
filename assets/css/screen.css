@@ -1,3 +1,8 @@
+:root{
+    --chatBox:  Pink;
+    --text-collor: Black;
+}
+
 h1{
     text-align: center;
 }
@@ -40,11 +45,12 @@ h1{
 .message{
     display: inline-block;
     border-style: solid;
-    border-color: pink;
+    border-color: var(--chatBox);
     border-width: 4px;
     border-radius: 15px;
     padding: 0.5rem;
-    background-color: pink;
+    background-color: var(--chatBox);
+    color: var(--text-collor);
 
 }
 
