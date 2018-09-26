@@ -14,7 +14,8 @@
 }
 #messageBox{
     margin-bottom: 5px;
-    border-bottom: 1px solid black
+    border-bottom: 1px solid black;
+    padding-bottom: 0.5vw;
 }
 #chatWindow{
     overflow-y: scroll;
