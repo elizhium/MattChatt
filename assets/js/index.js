@@ -85,18 +85,28 @@ function sendFromPage(e){
 }
 
 function changeNameFromPage(e){
-    e.preventDefault()
-
-    changeName(document.getElementById("changeName").value)
-    document.getElementById("nameForm").remove()
-    nameSet = true
+    e.preventDefault();
+    const name = document.getElementById("changeName").value;
+    localStorage.setItem("username", name);
+    changeName(name);
+    document.getElementById("nameForm").remove();
+    nameSet = true;
 
 }
-document.getElementById("send").addEventListener("click", sendFromPage);
-document.getElementById("changeNameButton").addEventListener("click", changeNameFromPage)
+$(document).ready(function () {
+    document.getElementById("send").addEventListener("click", sendFromPage);
+    document.getElementById("changeNameButton").addEventListener("click", changeNameFromPage);
+
+    const name = localStorage.getItem("username");
+    if(name !== null){
+        changeName(name);
+        nameSet = true;
+        $("#nameForm").remove();
+    }
 
 
-database.ref("messages/").on("value", getMessage)
+    database.ref("messages/").on("value", getMessage);
+});
 
 
 function updateScroll(){
