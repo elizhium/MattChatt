@@ -19,18 +19,18 @@ h1{
     margin-bottom: 1rem;
 }
 
-#name{
+.name{
     width: 10%;
     overflow: hidden;
     margin-right: 5vw
 
 }
-#name, #message, #time{
+.name, .message, .time{
     display: block;
     line-height: 1rem
 }
 
-#message{
+.message{
     display: inline-block;
     border-style: solid;
     border-color: pink;
@@ -44,7 +44,7 @@ h1{
 
 }
 
-#time{
+.time{
     float: left;
     margin-right:5vw
 }

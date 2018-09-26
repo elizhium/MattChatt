@@ -43,19 +43,23 @@ function getMessage(data) {
    messages.forEach((bericht)=>{
 
         message = document.createElement("div")
-        message.setAttribute("id", "messageBox")
+        message.setAttribute("class", "messageBox")
         var name = document.createElement("span")
+        var textAndTime = document.createElement("div")
         var text = document.createElement("span")
         var time = document.createElement("span")
+        textAndTime.classList.add("textTime")
         name.innerText = Object.keys(bericht)[0];
         text.innerText = Object.values(bericht)[0];
         time.innerText = Object.values(bericht)[1]
-        name.setAttribute("id", "name")
-        text.setAttribute("id", "message")
-        time.setAttribute("id", "time")
+        name.setAttribute("class", "name")
+        text.setAttribute("class", "message")
+        time.setAttribute("class", "time")
         message.appendChild(name);
-        message.appendChild(text);
-        message.appendChild(time)
+        textAndTime.appendChild(text);
+        
+        textAndTime.appendChild(time)
+        message.appendChild(textAndTime)
         document.getElementById("chatWindow").appendChild(message)
         
         
