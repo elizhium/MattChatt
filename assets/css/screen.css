@@ -1,3 +1,24 @@
+h1{
+    text-align: center;
+}
+
+#nameForm{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#chatElements{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+#chatWindow{
+    overflow-y: scroll;
+    height: 75vh;
+    margin-bottom: 1rem;
+}
+
 #name{
     width: 10%;
     overflow: hidden;
@@ -17,9 +38,9 @@
     border-bottom: 1px solid black;
     padding-bottom: 0.5vw;
 }
-#chatWindow{
-    overflow-y: scroll;
-    height: 80vh
+
+#chatElements > form > input{
+    width: 95%;
 }
 
 .invisible{
