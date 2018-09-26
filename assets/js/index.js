@@ -56,24 +56,28 @@ function getMessage(data) {
     document.getElementById("chatWindow").innerHTML = ""
    messages.forEach((bericht)=>{
 
-        message = document.createElement("div")
-        message.setAttribute("class", "messageBox")
-        var name = document.createElement("span")
-        var textAndTime = document.createElement("div")
-        var text = document.createElement("span")
-        var time = document.createElement("span")
-        textAndTime.classList.add("textTime")
+        message = document.createElement("div");
+        if(Object.keys(bericht)[0] === localStorage.getItem("username")){
+            message.setAttribute("class", "messageBox me");
+        } else {
+            message.setAttribute("class", "messageBox");
+        }
+        var name = document.createElement("span");
+        var textAndTime = document.createElement("div");
+        var text = document.createElement("span");
+        var time = document.createElement("span");
+        textAndTime.classList.add("textTime");
         name.innerText = Object.keys(bericht)[0];
         text.innerText = Object.values(bericht)[0];
-        time.innerText = Object.values(bericht)[1]
-        name.setAttribute("class", "name")
-        text.setAttribute("class", "message")
-        time.setAttribute("class", "time")
+        time.innerText = Object.values(bericht)[1];
+        name.setAttribute("class", "name");
+        text.setAttribute("class", "message");
+        time.setAttribute("class", "time");
         message.appendChild(name);
         textAndTime.appendChild(text);
         
-        textAndTime.appendChild(time)
-        message.appendChild(textAndTime)
+        textAndTime.appendChild(time);
+        message.appendChild(textAndTime);
         document.getElementById("chatWindow").appendChild(message)
         
         

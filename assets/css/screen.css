@@ -1,6 +1,11 @@
 :root{
     --chatBox:  Pink;
-    --text-collor: Black;
+    --text-collor: White;
+}
+
+body{
+    font-family: calibri;
+    font-size: 16px;
 }
 
 h1{
@@ -66,4 +71,22 @@ h1{
 
 .invisible{
     display: none
+}
+
+.me{
+    direction: rtl;
+    margin-left: 0.5vw;
+}
+
+.me .name{
+    margin-right: 0.5vw;
+    font-size: 0.9rem;
+}
+
+.me .message{
+    direction: ltr;
+}
+
+.me .time{
+    text-align: left;
 }
