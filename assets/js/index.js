@@ -16,23 +16,36 @@ let username = ""
 var nameSet = false
 var focused = true
 var original = "MattChatt"
+let pingSend = false
 
 function pingOnline(){
-onlineRef.set(JSON.parse("{}"))
+
+    pingSend = true
+    onlineRef.remove()
+onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
+
 }
 
 function renderOnline(data){
-    console.log(data)
+    console.log()
 }
 
 function answerOnline(snapchot){
 data = snapchot.val()
-if((Object.keys(data)).length = 0){
-    onlineRef.push(JSON.parse('{"online":"'+username+'"}'))
+
+if(data != null && (Object.keys(data)).length == 1){
+
+    if(pingSend){
+        pingSend = false
+    }else{
+        console.log("adding name")
+        onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
+
+    }
 }else{
     renderOnline(data)
 }
-console.log(data)
+
 
 
 }
@@ -60,8 +73,8 @@ function cleanChat(data) {
     var removed = 0
     while((Object.keys(data)).length-removed >250){
     messageRef.child(Object.keys(data)[0]).remove()
-    removed += 1 
-    
+    removed += 1
+
 
 
     }
