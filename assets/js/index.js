@@ -12,7 +12,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 var messageRef = database.ref("messages/")
 var onlineRef = database.ref("online/")
-let username = ""
+let username = null
 var nameSet = false
 var focused = true
 var original = "MattChatt"
@@ -27,13 +27,13 @@ onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
 }
 
 function renderOnline(data){
-    console.log()
+    console.log(data)
 }
 
 function answerOnline(snapchot){
 data = snapchot.val()
 
-if(data != null && (Object.keys(data)).length == 1){
+if(data != null && nameSet && (Object.keys(data)).length == 1){
 
     if(pingSend){
         pingSend = false
@@ -52,6 +52,7 @@ if(data != null && (Object.keys(data)).length == 1){
 
 function changeName (name){
     yourname = name
+    pingOnline()
 }
 
 function notify(bericht) {
@@ -124,7 +125,12 @@ function getMessage(data) {
     }
 
 cleanChat(data.val())
-pingOnline()
+
+if(nameSet){
+
+    pingOnline()
+}
+
 
 }
 
@@ -189,8 +195,8 @@ $(document).ready(function () {
     document.getElementById("changeNameButton").addEventListener("click", changeNameFromPage);
 
     username = localStorage.getItem("username");
-    if(name !== null){
-        changeName(name);
+    if(username !== null){
+        changeName(username);
         nameSet = true;
         $("#nameForm").remove()
     }
@@ -199,6 +205,7 @@ $(document).ready(function () {
     messageRef.on("value", getMessage);
     onlineRef.on("value", answerOnline);
 });
+
 document.addEventListener('DOMContentLoaded', function () {
     if (!Notification) {
         alert('Desktop notifications not available in your browser. Try Chromium.');
