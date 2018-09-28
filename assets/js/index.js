@@ -10,14 +10,49 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
-var ref = database.ref("messages/")
-var yourname = ""
+var messageRef = database.ref("messages/")
+var onlineRef = database.ref("online/")
+let username = null
 var nameSet = false
 var focused = true
 var original = "MattChatt"
+let pingSend = false
 
-function changeName(name) {
+function pingOnline(){
+
+    pingSend = true
+    onlineRef.remove()
+onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
+
+}
+
+function renderOnline(data){
+    console.log(data)
+}
+
+function answerOnline(snapchot){
+data = snapchot.val()
+
+if(data != null && nameSet && (Object.keys(data)).length == 1){
+
+    if(pingSend){
+        pingSend = false
+    }else{
+        console.log("adding name")
+        onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
+
+    }
+}else{
+    renderOnline(data)
+}
+
+
+
+}
+
+function changeName (name){
     yourname = name
+    pingOnline()
 }
 
 function notify(bericht) {
@@ -52,9 +87,10 @@ function notify(bericht) {
 
 function cleanChat(data) {
     var removed = 0
-    while ((Object.keys(data)).length - removed > 250) {
-        ref.child(Object.keys(data)[0]).remove()
-        removed += 1
+    while((Object.keys(data)).length-removed >250){
+    messageRef.child(Object.keys(data)[0]).remove()
+    removed += 1
+
 
 
     }
@@ -102,7 +138,13 @@ function getMessage(data) {
         notify(messages[messages.length - 1])
     }
 
-    cleanChat(data.val())
+cleanChat(data.val())
+
+if(nameSet){
+
+    pingOnline()
+}
+
 
 }
 
@@ -115,7 +157,9 @@ function sendMessage(message) {
         min = "0" + min
     }
     timeString = timeString + ":" + min
-    database.ref("messages/").push(JSON.parse('{"' + yourname + '":"' + message + '", "timestamp":"' + timeString + '"}'));
+
+    let send = '{"'+yourname+'":"'+message+'", "timestamp":"'+  timeString +'"}'
+    messageRef.push(JSON.parse(send));
 }
 
 function sendFromPage(e) {
@@ -140,23 +184,9 @@ function changeNameFromPage(e) {
 
 }
 
-$(document).ready(function () {
-    document.getElementById("send").addEventListener("click", sendFromPage);
-    document.getElementById("changeNameButton").addEventListener("click", changeNameFromPage);
-
-    const name = localStorage.getItem("username");
-    if (name !== null) {
-        changeName(name);
-        nameSet = true;
-        $("#nameForm").remove();
-    }
 
 
-    database.ref("messages/").on("value", getMessage);
-});
-
-
-function updateScroll() {
+function updateScroll(){
     var element = document.getElementById("chatWindow");
     element.scrollTop = element.scrollHeight;
 
@@ -173,6 +203,23 @@ window.onblur = function () {
     focused = false
 
 }
+
+$(document).ready(function () {
+    document.getElementById("send").addEventListener("click", sendFromPage);
+    document.getElementById("changeNameButton").addEventListener("click", changeNameFromPage);
+
+    username = localStorage.getItem("username");
+    if(username !== null){
+        changeName(username);
+        nameSet = true;
+        $("#nameForm").remove()
+    }
+
+
+    messageRef.on("value", getMessage);
+    onlineRef.on("value", answerOnline);
+});
+
 document.addEventListener('DOMContentLoaded', function () {
     if (!Notification) {
         alert('Desktop notifications not available in your browser. Try Chromium.');
