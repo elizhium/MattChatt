@@ -22,12 +22,22 @@ function pingOnline(){
 
     pingSend = true
     onlineRef.remove()
-onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
+    onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
 
 }
 
 function renderOnline(data){
-    console.log(data)
+    if(data === null){
+        console.log("Only you are online")
+    }else{
+        console.log("Nu online:")
+        let onlines =(Object.values(data))
+        onlines.forEach(onlineObj => {
+            console.log((Object.values(onlineObj))[0])
+        }
+
+        )
+    }
 }
 
 function answerOnline(snapchot){
@@ -229,4 +239,3 @@ document.addEventListener('DOMContentLoaded', function () {
     if (Notification.permission !== "granted")
         Notification.requestPermission();
 });
-
