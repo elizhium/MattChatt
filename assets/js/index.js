@@ -21,16 +21,31 @@ function changeName(name) {
 }
 
 function notify(bericht) {
+
     window.document.title = "berichtje!!!"
 
+    if (Notification.permission !== "granted")
+        Notification.requestPermission();
+    else {
+        let sender = "";
+        let message = "";
+        for (var key in bericht) {
+            if (bericht.hasOwnProperty(key) && key !== "timestamp") {
+                sender = key;
+                message = bericht[key];
+            }
+        }
 
-    if (!Notification.permission === "granted") {
-        Notification.requestPermission()
+        var notification = new Notification(sender, {
+            icon: 'https://png.icons8.com/cotton/1600/filled-chat.png',
+            body:message,
+        });
+
+        notification.onclick = function () {
+            window.open("https://bruynooghematthias.github.io/MattChatt/");
+        };
+
     }
-
-    var not = new Notification("berichtje", {
-        body: "Je hebt een bericht gekregen op MattChatt"
-    });
 
 
 }
@@ -48,7 +63,6 @@ function cleanChat(data) {
 }
 
 function getMessage(data) {
-    notifyMe();
     var messages = Object.values(data.val());
 
     document.getElementById("chatWindow").innerHTML = ""
@@ -169,19 +183,3 @@ document.addEventListener('DOMContentLoaded', function () {
         Notification.requestPermission();
 });
 
-function notifyMe() {
-    if (Notification.permission !== "granted")
-        Notification.requestPermission();
-    else {
-        var notification = new Notification('MattChatt', {
-            icon: 'https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwia-O2x6N3dAhXRGuwKHR7SDNEQjRx6BAgBEAU&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F298330%2Fchat_bubble_conversation_messages_talk_icon&psig=AOvVaw2uvpmCzflCstwuZRhIJgN9&ust=1538228107827082',
-            body: "You got a new Message!!!!",
-        });
-
-        notification.onclick = function () {
-            window.open("https://bruynooghematthias.github.io/MattChatt/");
-        };
-
-    }
-
-}
