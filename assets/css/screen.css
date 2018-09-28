@@ -44,6 +44,7 @@ h1{
 }
 
 .textTime{
+    max-width: 40%;
     width: max-content;
 }
 
@@ -56,7 +57,6 @@ h1{
     padding: 0.5rem;
     background-color: var(--chatBox);
     color: var(--text-collor);
-
 }
 
 .time{
@@ -67,6 +67,10 @@ h1{
 
 #chatElements  input{
     width: 95%;
+}
+
+#chatElements input, #chatElements input + button{
+    float: left;
 }
 
 .invisible{
