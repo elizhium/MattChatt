@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="assets/css/screen.css" rel="stylesheet">
+    <title>MattChatt</title>
+
+</head>
+<body>
+
+    <h1>MattChatt</h1>
+
+
+
+    <form id="nameForm">
+        <label for="changeName">Change your name</label>
+    <input type="text" id="changeName">
+    <button id="changeNameButton">Send</button>
+    </form>
+    <div id="chatElements" >
+    <div id="chatWindow"></div>
+    <form >
+        <input id="mess" type="text">
+        <button id="send">Send</button>
+    </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.1/firebase.js"></script>
+    <script type="text/javascript" src="assets/js/index.js"></script>
+
+
+
+</body>
 </html>

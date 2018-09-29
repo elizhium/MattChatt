@@ -1,0 +1,96 @@
+:root{
+    --chatBox:  Pink;
+    --text-collor: White;
+}
+
+body{
+    font-family: calibri;
+    font-size: 16px;
+}
+
+h1{
+    text-align: center;
+}
+
+#nameForm{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#chatElements{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+
+#chatWindow{
+    overflow-y: scroll;
+    height: 75vh;
+    margin-bottom: 1rem;
+}
+
+.messageBox{
+    margin-bottom: 1rem;
+}
+
+.name, .message, .time{
+    display: block;
+    line-height: 1rem
+}
+
+.name{
+    overflow: hidden;
+    margin-bottom: 0.2rem;
+}
+
+.textTime{
+    max-width: 40%;
+    width: max-content;
+}
+
+.message{
+    display: inline-block;
+    border-style: solid;
+    border-color: var(--chatBox);
+    border-width: 4px;
+    border-radius: 15px;
+    padding: 0.5rem;
+    background-color: var(--chatBox);
+    color: var(--text-collor);
+}
+
+.time{
+    margin-right: 0.5vw;
+    text-align: right;
+    font-size: 0.7rem;
+}
+
+#chatElements  input{
+    width: 95%;
+}
+
+#chatElements input, #chatElements input + button{
+    float: left;
+}
+
+.invisible{
+    display: none
+}
+
+.me{
+    direction: rtl;
+    margin-left: 0.5vw;
+}
+
+.me .name{
+    margin-right: 0.5vw;
+    font-size: 0.9rem;
+}
+
+.me .message{
+    direction: ltr;
+}
+
+.me .time{
+    text-align: left;
+}
