@@ -1,6 +1,6 @@
 :root{
-    --chatBox:  Pink;
-    --text-collor: White;
+    --chatBox:  #665ae2;
+    --text-collor: white;
 }
 
 body{
@@ -65,11 +65,24 @@ h1{
     font-size: 0.7rem;
 }
 
-#chatElements  input{
-    width: 95%;
+#chatElements form{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 }
 
-#chatElements input, #chatElements input + button{
+#chatElements  input{
+    width: 90%;
+    float: left;
+}
+
+#chatElements input + p{
+    display: inline;
+    position: relative;
+    left: -6%;
+}
+
+#send{
     float: left;
 }
 
