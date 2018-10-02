@@ -10,18 +10,18 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
-var messageRef = database.ref("messages/")
-var onlineRef = database.ref("online/")
-let username = null
-var nameSet = false
-var focused = true
-var original = "MattChatt"
-let pingSend = false
+var messageRef = database.ref("messages/");
+var onlineRef = database.ref("online/");
+let username = null;
+var nameSet = false;
+var focused = true;
+var original = "MattChatt";
+let pingSend = false;
 
 function pingOnline(){
 
-    pingSend = true
-    onlineRef.remove()
+    pingSend = true;
+    onlineRef.remove();
     onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
 
 }
@@ -50,7 +50,7 @@ function renderOnline(data){
 }
 
 function answerOnline(snapchot){
-data = snapchot.val()
+data = snapchot.val();
 
 
 if(data != null && nameSet && (Object.keys(data)).length == 1){
@@ -58,13 +58,8 @@ if(data != null && nameSet && (Object.keys(data)).length == 1){
     if(pingSend){
         pingSend = false
     }else{
-        let onlines = []
-        (Object.values(data)).map(onliner => {
-            onlines.push((Object.values(onliner))[0])
-        })
-        console.log(onlines)
-        if(onlines.includes(username)){
-            onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
+        console.log("adding name")
+        onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
 
         }
         
@@ -80,13 +75,13 @@ if(data != null && nameSet && (Object.keys(data)).length == 1){
 }
 
 function changeName (name){
-    yourname = name
+    yourname = name;
     pingOnline()
 }
 
 function notify(bericht) {
 
-    window.document.title = "berichtje!!!"
+    window.document.title = "berichtje!!!";
 
     if (Notification.permission !== "granted")
         Notification.requestPermission();
@@ -115,9 +110,9 @@ function notify(bericht) {
 }
 
 function cleanChat(data) {
-    var removed = 0
+    var removed = 0;
     while((Object.keys(data)).length-removed >250){
-    messageRef.child(Object.keys(data)[0]).remove()
+    messageRef.child(Object.keys(data)[0]).remove();
     removed += 1
 
 
@@ -130,7 +125,7 @@ function cleanChat(data) {
 function getMessage(data) {
     var messages = Object.values(data.val());
 
-    document.getElementById("chatWindow").innerHTML = ""
+    document.getElementById("chatWindow").innerHTML = "";
     messages.forEach((bericht) => {
 
             message = document.createElement("div");
@@ -159,7 +154,7 @@ function getMessage(data) {
 
 
         }
-    )
+    );
 
     updateScroll();
 
@@ -167,7 +162,7 @@ function getMessage(data) {
         notify(messages[messages.length - 1])
     }
 
-cleanChat(data.val())
+cleanChat(data.val());
 
 if(nameSet){
 
@@ -179,16 +174,16 @@ if(nameSet){
 
 
 function sendMessage(message) {
-    var d = new Date
-    var timeString = d.getHours()
-    var min = d.getMinutes()
+    var d = new Date;
+    var timeString = d.getHours();
+    var min = d.getMinutes();
     if (d.getMinutes() < 10) {
         min = "0" + min
     }
-    timeString = timeString + ":" + min
+    timeString = timeString + ":" + min;
     if(!(message.replaceAll(" ", "").length==0 )){
-        console.log(message.replaceAll(" ", "").length)
-        let send = '{"'+yourname+'":"'+message+'", "timestamp":"'+  timeString +'"}'
+        console.log(message.replaceAll(" ", "").length);
+        let send = '{"'+yourname+'":"'+message+'", "timestamp":"'+  timeString +'"}';
     messageRef.push(JSON.parse(send));
     }
     
@@ -226,28 +221,28 @@ function updateScroll(){
 
 
 function messageBoxColorChange(e){
-let color = document.getElementById("messageBoxColor").value
-    changeCssVar("--chatBox", color)
+let color = document.getElementById("messageBoxColor").value;
+    changeCssVar("--chatBox", color);
 localStorage.setItem("--chatBox", color);
 }
 
 function textColorChange(e){
-    let color = document.getElementById("messageTextColor").value
-    changeCssVar("--text-color", color)
+    let color = document.getElementById("messageTextColor").value;
+    changeCssVar("--text-color", color);
     localStorage.setItem("--text-color", color);
     }
 
 window.onfocus = function () {
 
-    focused = true
+    focused = true;
     window.document.title = original
 
-}
+};
 window.onblur = function () {
-    original = window.document.title
+    original = window.document.title;
     focused = false
 
-}
+};
 
 function changeCssVar(vari, val){
 
@@ -256,7 +251,7 @@ function changeCssVar(vari, val){
 }
 
 function loadCssVar(vari){
-    let val 
+    let val;
     if(!(localStorage.getItem(vari))){
          val = getComputedStyle(document.body).getPropertyValue(vari);
 
@@ -270,7 +265,7 @@ function loadCssVar(vari){
 }
 
 function setColorInput(inputId, val){
-    console.log(val)
+    console.log(val);
     
     document.getElementById(inputId).value = val
 
@@ -280,11 +275,11 @@ function setColorInput(inputId, val){
 
 
 function makeOptions(){
-    let messageBoxColor = loadCssVar("--chatBox")
-    changeCssVar("--chatBox", messageBoxColor)   
-    setColorInput("messageBoxColor", messageBoxColor) 
-    let messageTextColor = loadCssVar("--text-color")
-    changeCssVar("--text-color", messageTextColor)   
+    let messageBoxColor = loadCssVar("--chatBox");
+    changeCssVar("--chatBox", messageBoxColor);
+    setColorInput("messageBoxColor", messageBoxColor);
+    let messageTextColor = loadCssVar("--text-color");
+    changeCssVar("--text-color", messageTextColor);
     setColorInput("messageTextColor", messageTextColor) 
 
     
@@ -308,8 +303,8 @@ function start (){
     document.getElementById("send").addEventListener("click", sendFromPage);
     document.getElementById("changeNameButton").addEventListener("click", changeNameFromPage);
     document.getElementById("messageBoxColor").addEventListener("change", messageBoxColorChange);
-    document.getElementById("messageTextColor").addEventListener("change",textColorChange)
-    makeOptions()
+    document.getElementById("messageTextColor").addEventListener("change",textColorChange);
+    makeOptions();
 
 
     username = localStorage.getItem("username");
@@ -329,4 +324,4 @@ function start (){
     };
 }
 
-document.addEventListener("DOMContentLoaded", start)
+document.addEventListener("DOMContentLoaded", start);
