@@ -167,9 +167,12 @@ function sendMessage(message) {
         min = "0" + min
     }
     timeString = timeString + ":" + min
-
-    let send = '{"'+yourname+'":"'+message+'", "timestamp":"'+  timeString +'"}'
+    if(!(message.replace(" ", "").length==0 )){
+        console.log()
+        let send = '{"'+yourname+'":"'+message+'", "timestamp":"'+  timeString +'"}'
     messageRef.push(JSON.parse(send));
+    }
+    
 }
 
 function sendFromPage(e) {
