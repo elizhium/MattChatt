@@ -167,8 +167,8 @@ function sendMessage(message) {
         min = "0" + min
     }
     timeString = timeString + ":" + min
-    if(!(message.replace(" ", "").length==0 )){
-        console.log()
+    if(!(message.replaceAll(" ", "").length==0 )){
+        console.log(message.replaceAll(" ", "").length)
         let send = '{"'+yourname+'":"'+message+'", "timestamp":"'+  timeString +'"}'
     messageRef.push(JSON.parse(send));
     }
@@ -303,6 +303,11 @@ function start (){
 
     messageRef.on("value", getMessage);
     onlineRef.on("value", answerOnline);
+
+    String.prototype.replaceAll = function(search, replacement) {
+        var target = this;
+        return target.split(search).join(replacement);
+    };
 }
 
 document.addEventListener("DOMContentLoaded", start)
