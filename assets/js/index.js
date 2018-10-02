@@ -205,19 +205,13 @@ function updateScroll(){
 
 function messageBoxColorChange(e){
 let color = document.getElementById("messageBoxColor").value
-console.log(color)
-
-var html = document.getElementsByTagName('html')[0];
-html.style.cssText = ("--chatBox:"+ color);
+    changeCssVar("--chatBox", color)
 localStorage.setItem("--chatBox", color);
 }
 
 function textColorChange(e){
     let color = document.getElementById("messageTextColor").value
-    console.log(color)
-    
-    var html = document.getElementsByTagName('html')[0];
-    html.style.cssText = ("--text-color:"+ color);
+    changeCssVar("--text-color", color)
     localStorage.setItem("--text-color", color);
     }
 
@@ -236,15 +230,13 @@ window.onblur = function () {
 function changeCssVar(vari, val){
 
     var html = document.getElementsByTagName('html')[0];
-    html.style.cssText = (vari+":"+ val);
+    html.style.setProperty(vari, val);
 }
 
 function loadCssVar(vari){
     let val 
     if(!(localStorage.getItem(vari))){
          val = getComputedStyle(document.body).getPropertyValue(vari);
-
-    
 
     }
     else{
