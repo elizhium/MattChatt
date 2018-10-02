@@ -27,13 +27,22 @@ function pingOnline(){
 }
 
 function renderOnline(data){
+    let onlineWindow = document.getElementById("onlineList");
+    onlineWindow.innerHTML = "";
     if(data === null){
-        console.log("Only you are online")
+        let  p = document.createElement("p");
+        p.textContent = "You are alone";
+
+
     }else{
-        console.log("Nu online:")
+       line = document.createElement("h2");
+       line.innerText=("nu online")
+       onlineWindow.appendChild(line);
         let onlines =(Object.values(data))
         onlines.forEach(onlineObj => {
-            console.log((Object.values(onlineObj))[0])
+            let p = document.createElement("p")
+            p.textContent = (Object.values(onlineObj))[0]
+            onlineWindow.appendChild(p)
         }
 
         )
@@ -43,13 +52,23 @@ function renderOnline(data){
 function answerOnline(snapchot){
 data = snapchot.val()
 
-if(data != null && nameSet && (Object.keys(data)).length == 1){
 
+if(data != null && nameSet && (Object.keys(data)).length == 1){
+    console.log(Object.values(data))
     if(pingSend){
         pingSend = false
     }else{
-        console.log("adding name")
-        onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
+        let onlines = []
+        (Object.values(data)).map(onliner => {
+            onlines.push((Object.values(onliner))[0])
+        })
+        console.log(onlines)
+        if(onlines.includes(username)){
+            onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
+
+        }
+        
+
 
     }
 }else{
