@@ -202,6 +202,25 @@ function updateScroll(){
 
 }
 
+
+function messageBoxColorChange(e){
+let color = document.getElementById("messageBoxColor").value
+console.log(color)
+
+var html = document.getElementsByTagName('html')[0];
+html.style.cssText = ("--chatBox:"+ color);
+localStorage.setItem("--chatBox", color);
+}
+
+function textColorChange(e){
+    let color = document.getElementById("messageTextColor").value
+    console.log(color)
+    
+    var html = document.getElementsByTagName('html')[0];
+    html.style.cssText = ("--text-color:"+ color);
+    localStorage.setItem("--text-color", color);
+    }
+
 window.onfocus = function () {
 
     focused = true
@@ -214,9 +233,70 @@ window.onblur = function () {
 
 }
 
-$(document).ready(function () {
+function changeCssVar(vari, val){
+
+    var html = document.getElementsByTagName('html')[0];
+    html.style.cssText = (vari+":"+ val);
+}
+
+function loadCssVar(vari){
+    let val 
+    if(!(localStorage.getItem(vari))){
+         val = getComputedStyle(document.body).getPropertyValue(vari);
+
+    
+
+    }
+    else{
+         val = localStorage.getItem(vari)
+        
+    }
+    
+    return val
+}
+
+function setColorInput(inputId, val){
+    console.log(val)
+    
+    document.getElementById(inputId).value = val
+
+
+}
+
+
+
+function makeOptions(){
+    let messageBoxColor = loadCssVar("--chatBox")
+    changeCssVar("--chatBox", messageBoxColor)   
+    setColorInput("messageBoxColor", messageBoxColor) 
+    let messageTextColor = loadCssVar("--text-color")
+    changeCssVar("--text-color", messageTextColor)   
+    setColorInput("messageTextColor", messageTextColor) 
+
+    
+    
+}
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    if (!Notification) {
+        alert('Desktop notifications not available in your browser. Try Chromium.');
+        return;
+    }
+
+    if (Notification.permission !== "granted")
+        Notification.requestPermission();
+});
+
+function start (){
+
     document.getElementById("send").addEventListener("click", sendFromPage);
     document.getElementById("changeNameButton").addEventListener("click", changeNameFromPage);
+    document.getElementById("messageBoxColor").addEventListener("change", messageBoxColorChange);
+    document.getElementById("messageTextColor").addEventListener("change",textColorChange)
+    makeOptions()
+
 
     username = localStorage.getItem("username");
     if(username !== null){
@@ -228,14 +308,6 @@ $(document).ready(function () {
 
     messageRef.on("value", getMessage);
     onlineRef.on("value", answerOnline);
-});
+}
 
-document.addEventListener('DOMContentLoaded', function () {
-    if (!Notification) {
-        alert('Desktop notifications not available in your browser. Try Chromium.');
-        return;
-    }
-
-    if (Notification.permission !== "granted")
-        Notification.requestPermission();
-});
+document.addEventListener("DOMContentLoaded", start)
