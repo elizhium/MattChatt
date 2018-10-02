@@ -108,6 +108,9 @@ div+form:after {
 .me .name{
     margin-right: 0.5vw;
     font-size: 0.9rem;
+    direction: ltr;
+    max-width: 40%;
+    width: max-content;
 }
 
 .me .message{
