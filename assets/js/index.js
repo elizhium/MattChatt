@@ -35,10 +35,12 @@ function renderOnline(data){
 
 
     }else{
+
        line = document.createElement("h2");
        line.innerText=("nu online")
        onlineWindow.appendChild(line);
         let onlines =(Object.values(data))
+
         onlines.forEach(onlineObj => {
             let p = document.createElement("p")
             p.textContent = (Object.values(onlineObj))[0]
@@ -58,15 +60,19 @@ if(data != null && nameSet && (Object.keys(data)).length == 1){
     if(pingSend){
         pingSend = false
     }else{
-        console.log("adding name")
-        onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
+        let onlines = []
+        (Object.values(data)).map(onliner => {
+            onlines.push((Object.values(onliner))[0])
+        })
+        console.log(onlines)
+        if(!onlines.includes(username)){
+            onlineRef.push(JSON.parse('{"online":"'+localStorage.getItem("username")+'"}'))
 
-        }
+        }}
         
 
 
-    }
-else{
+}else{
     renderOnline(data)
 }
 
@@ -324,4 +330,4 @@ function start (){
     };
 }
 
-document.addEventListener("DOMContentLoaded", start);
+document.addEventListener("DOMContentLoaded", start); 
