@@ -66,7 +66,7 @@ if(data != null && nameSet && (Object.keys(data)).length == 1){
 
 
     }
-}else{
+else{
     renderOnline(data)
 }
 
